@@ -57,4 +57,4 @@ buildNumber.properties
 !/.mvn/wrapper/maven-wrapper.jar
 
 /.idea/
-/ticket-agency-ejb.iml
+/ticket-agency-ejb_bak.iml
