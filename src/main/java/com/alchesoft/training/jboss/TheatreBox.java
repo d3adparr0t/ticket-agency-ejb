@@ -10,11 +10,9 @@ import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-/**
- * Created by alex on 13.06.17.
- */
 @Singleton
 @Startup
 public class TheatreBox {
@@ -36,19 +34,28 @@ public class TheatreBox {
     }
 
     @Lock(LockType.READ)
-    public List<Seat> getSeats() {
-        return this.seats;
+    public Seat findById(int id) {
+        return this.seats.stream()
+                .filter(seat -> seat.getId() == id)
+                .findFirst().orElse(null);
     }
 
     @Lock(LockType.READ)
     public int getSeatPrice(int id) {
         return this.seats.stream()
                 .filter(seat -> seat.getId() == id)
-                .findFirst().get()
-                .getPrice();
+                .map(Seat::getPrice)
+                .findFirst().orElse(0);
     }
 
     @Lock(LockType.READ)
+    public String printSeats() {
+        return this.seats.stream()
+                .map(Seat::toString)
+                .collect(Collectors.joining("\n"));
+    }
+
+    @Lock(LockType.WRITE)
     public void buyTicket(Seat seat) {
         seat.setBooked(true);
     }
