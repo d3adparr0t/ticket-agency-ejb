@@ -1,11 +1,13 @@
 package com.alchesoft.training.jboss;
 
 import javax.ejb.EJB;
+import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
 
-@Stateless(name = "TheatreInfoEJB")
-public class TheatreInfoBean {
+@Stateless
+@Remote(TheatreInfo.class)
+public class TheatreInfoBean implements TheatreInfo {
 
     @EJB
     private TheatreBox theatreBox;

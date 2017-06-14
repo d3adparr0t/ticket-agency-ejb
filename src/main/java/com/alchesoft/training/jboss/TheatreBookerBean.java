@@ -4,11 +4,13 @@ import org.jboss.logging.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.ejb.Remote;
 import javax.ejb.Stateful;
 
 
-@Stateful(name = "TheatreBookerEJB")
-public class TheatreBookerBean {
+@Stateful
+@Remote(TheatreBooker.class)
+public class TheatreBookerBean implements TheatreBooker {
 
     private final static Logger log = Logger.getLogger(TheatreBookerBean.class);
 
@@ -22,6 +24,7 @@ public class TheatreBookerBean {
         this.account = 100;
     }
 
+    @Override
     public String bookSeat(int seatId) {
         Seat seat = theatreBox.findById(seatId);
         if(seat.isBooked()) {
