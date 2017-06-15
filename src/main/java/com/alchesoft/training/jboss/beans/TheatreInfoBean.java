@@ -1,4 +1,4 @@
-package com.alchesoft.training.jboss;
+package com.alchesoft.training.jboss.beans;
 
 import javax.ejb.EJB;
 import javax.ejb.Remote;

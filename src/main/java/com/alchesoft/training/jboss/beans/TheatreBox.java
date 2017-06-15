@@ -1,6 +1,8 @@
-package com.alchesoft.training.jboss;
+package com.alchesoft.training.jboss.beans;
 
 import static java.util.stream.Collectors.*;
+
+import com.alchesoft.training.jboss.domain.Seat;
 import org.jboss.logging.Logger;
 
 import javax.annotation.PostConstruct;

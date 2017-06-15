@@ -1,11 +1,8 @@
-package com.alchesoft.training.jboss;
+package com.alchesoft.training.jboss.domain;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
-/**
- * Created by alex on 14.06.17.
- */
 @Data
 @RequiredArgsConstructor
 public class Seat {

@@ -1,5 +1,8 @@
-package com.alchesoft.training.jboss;
+package com.alchesoft.training.jboss.beans;
 
+import com.alchesoft.training.jboss.domain.Seat;
+import com.alchesoft.training.jboss.exceptions.InsufficientFundsException;
+import com.alchesoft.training.jboss.exceptions.SeatBookedException;
 import org.jboss.logging.Logger;
 
 import javax.annotation.PostConstruct;
@@ -25,13 +28,13 @@ public class TheatreBookerBean implements TheatreBooker {
     }
 
     @Override
-    public String bookSeat(int seatId) {
+    public String bookSeat(int seatId) throws Exception {
         Seat seat = theatreBox.findById(seatId);
         if(seat.isBooked()) {
-            return "Seat already booked!";
+            throw new SeatBookedException("Seat already booked!");
         }
         if (seat.getPrice() > account) {
-            return "You're way too poor!";
+            throw new InsufficientFundsException("You're way too poor!");
         }
         theatreBox.buyTicket(seat);
         account -= seat.getPrice();
